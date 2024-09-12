@@ -102,8 +102,7 @@ impl Packet {
         #[cfg(not(fuzzing))]
         // only check for checksums when we are not fuzzing. This lets the fuzzer test the code much easier without guessing correct checksums.
         {
-            // Change for NetherNet, MCBE requires big endian check sums
-            let their_checksum = reader.get_u32();
+            let their_checksum = reader.get_u32_le();
             let our_checksum = generate_packet_checksum(raw);
 
             if their_checksum != our_checksum {
